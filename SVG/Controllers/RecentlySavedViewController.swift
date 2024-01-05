@@ -24,6 +24,8 @@ class RecentlySavedViewController: UIViewController {
         let button = UIButton(configuration: .filled())
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Clear", for: .normal)
+        button.backgroundColor = UIColor(named: "buttonColor")
+        button.layer.cornerRadius = 30
         return button
     }()
 

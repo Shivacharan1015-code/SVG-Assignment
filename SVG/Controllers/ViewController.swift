@@ -14,6 +14,8 @@ class ViewController: UIViewController {
         let button = UIButton(configuration: .filled())
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Generate Dogs", for: .normal)
+        button.backgroundColor = UIColor(named: "buttonColor")
+        button.layer.cornerRadius = 30
         return button
     }()
     
@@ -22,6 +24,8 @@ class ViewController: UIViewController {
         let button = UIButton(configuration: .filled())
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Recently Generated Dogs", for: .normal)
+        button.backgroundColor = UIColor(named: "buttonColor")
+        button.layer.cornerRadius = 30
         return button
     }()
     

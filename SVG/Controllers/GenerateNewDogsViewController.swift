@@ -23,6 +23,8 @@ class GenerateNewDogsViewController: UIViewController {
         let button = UIButton(configuration: .filled())
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Generate", for: .normal)
+        button.backgroundColor = UIColor(named: "buttonColor")
+        button.layer.cornerRadius = 30
         return button
     }()
     
