@@ -12,11 +12,10 @@ class APICaller {
     
     static let shared = APICaller()
     
-    var taskReference: URLSessionDataTask?
     var savedImages: [Data] = []
     
     init() {
-        savedImages =  retriveStoredImages()
+        savedImages = retriveStoredImages()
     }
     
     func getRandomDogImages(completion: @escaping(Result<RandomDog, Error>) -> Void) {
@@ -46,14 +45,14 @@ class APICaller {
         
         guard let url = URL(string: url) else { return }
         
-        taskReference = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, _, error in
+        let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, _, error in
             
             guard let data = data,
                   error == nil else { return }
             
             if let image = UIImage(data: data) {
                 
-                if self.savedImages.count < 5 {
+                if self.savedImages.count < 20 {
                     self.savedImages.append(data)
                     UserDefaults.standard.set(self.savedImages, forKey: "savedImages")
                 } else {
@@ -66,11 +65,7 @@ class APICaller {
                 completion(.success(UIImage(named: "error")!))
             }
         }
-        taskReference?.resume()
-    }
-    
-    func cancelRequest() {
-        taskReference?.cancel()
+        task.resume()
     }
     
     func retriveStoredImages() -> [Data] {
