@@ -9,11 +9,13 @@ import UIKit
 
 class RecentlySavedViewController: UIViewController {
     
+    var images: [Data]?
+    
     private let savedCollectionView: UICollectionView = {
        
         let view = UICollectionView(frame: .zero, collectionViewLayout: RecentlySavedViewController.createCompositionalLayout())
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+        view.register(ImageCollectionViewCell.self, forCellWithReuseIdentifier: ImageCollectionViewCell.identifier)
         return view
     }()
     
@@ -36,6 +38,11 @@ class RecentlySavedViewController: UIViewController {
         savedCollectionView.dataSource = self
         
         view.addSubview(clearCacheButton)
+        clearCacheButton.addAction(UIAction(handler: { _ in
+            self.clearSavedImages()
+        }), for: .touchUpInside)
+        
+        getSavedImages()
     }
     
     override func viewDidLayoutSubviews() {
@@ -68,18 +75,36 @@ class RecentlySavedViewController: UIViewController {
         
         return UICollectionViewCompositionalLayout(section: section)
     }
+    
+    func getSavedImages() {
+        
+        images = APICaller.shared.retriveStoredImages()
+        DispatchQueue.main.async {
+            self.savedCollectionView.reloadData()
+        }
+    }
+    
+    func clearSavedImages() {
+        
+        APICaller.shared.clearSavedImages()
+        images = nil
+        DispatchQueue.main.async {
+            self.savedCollectionView.reloadData()
+        }
+    }
 
 }
 
 extension RecentlySavedViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return images?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
-        cell.backgroundColor = .gray
+        
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImageCollectionViewCell.identifier, for: indexPath) as? ImageCollectionViewCell else { return UICollectionViewCell() }
+        cell.configure(data: images?[indexPath.row])
         return cell
     }
 }
