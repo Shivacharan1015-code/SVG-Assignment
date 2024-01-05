@@ -14,6 +14,8 @@
 		76E27FD72B48123300D24FD9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 76E27FD52B48123300D24FD9 /* LaunchScreen.storyboard */; };
 		76E27FDF2B48151000D24FD9 /* GenerateNewDogsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E27FDE2B48151000D24FD9 /* GenerateNewDogsViewController.swift */; };
 		76E27FE12B48159200D24FD9 /* RecentlySavedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E27FE02B48159200D24FD9 /* RecentlySavedViewController.swift */; };
+		76E27FE52B481A2000D24FD9 /* RandomDog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E27FE42B481A2000D24FD9 /* RandomDog.swift */; };
+		76E27FE82B481AE800D24FD9 /* APICaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E27FE72B481AE800D24FD9 /* APICaller.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		76E27FD82B48123300D24FD9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		76E27FDE2B48151000D24FD9 /* GenerateNewDogsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateNewDogsViewController.swift; sourceTree = "<group>"; };
 		76E27FE02B48159200D24FD9 /* RecentlySavedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentlySavedViewController.swift; sourceTree = "<group>"; };
+		76E27FE42B481A2000D24FD9 /* RandomDog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomDog.swift; sourceTree = "<group>"; };
+		76E27FE72B481AE800D24FD9 /* APICaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICaller.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,14 +64,40 @@
 			children = (
 				76E27FCA2B48123000D24FD9 /* AppDelegate.swift */,
 				76E27FCC2B48123000D24FD9 /* SceneDelegate.swift */,
-				76E27FCE2B48123000D24FD9 /* ViewController.swift */,
-				76E27FDE2B48151000D24FD9 /* GenerateNewDogsViewController.swift */,
-				76E27FE02B48159200D24FD9 /* RecentlySavedViewController.swift */,
+				76E27FE62B481ADE00D24FD9 /* API */,
+				76E27FE32B481A1200D24FD9 /* Model */,
+				76E27FE22B4819FA00D24FD9 /* Controllers */,
 				76E27FD32B48123300D24FD9 /* Assets.xcassets */,
 				76E27FD52B48123300D24FD9 /* LaunchScreen.storyboard */,
 				76E27FD82B48123300D24FD9 /* Info.plist */,
 			);
 			path = SVG;
+			sourceTree = "<group>";
+		};
+		76E27FE22B4819FA00D24FD9 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				76E27FCE2B48123000D24FD9 /* ViewController.swift */,
+				76E27FDE2B48151000D24FD9 /* GenerateNewDogsViewController.swift */,
+				76E27FE02B48159200D24FD9 /* RecentlySavedViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		76E27FE32B481A1200D24FD9 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				76E27FE42B481A2000D24FD9 /* RandomDog.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		76E27FE62B481ADE00D24FD9 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				76E27FE72B481AE800D24FD9 /* APICaller.swift */,
+			);
+			path = API;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -143,8 +173,10 @@
 				76E27FCF2B48123000D24FD9 /* ViewController.swift in Sources */,
 				76E27FE12B48159200D24FD9 /* RecentlySavedViewController.swift in Sources */,
 				76E27FCB2B48123000D24FD9 /* AppDelegate.swift in Sources */,
+				76E27FE82B481AE800D24FD9 /* APICaller.swift in Sources */,
 				76E27FCD2B48123000D24FD9 /* SceneDelegate.swift in Sources */,
 				76E27FDF2B48151000D24FD9 /* GenerateNewDogsViewController.swift in Sources */,
+				76E27FE52B481A2000D24FD9 /* RandomDog.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
