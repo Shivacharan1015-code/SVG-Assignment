@@ -13,6 +13,11 @@ class APICaller {
     static let shared = APICaller()
     
     var taskReference: URLSessionDataTask?
+    var savedImages: [Data] = []
+    
+    init() {
+        savedImages =  retriveStoredImages()
+    }
     
     func getRandomDogImages(completion: @escaping(Result<RandomDog, Error>) -> Void) {
         
@@ -41,17 +46,42 @@ class APICaller {
         
         guard let url = URL(string: url) else { return }
         
-        let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, _, error in
+        taskReference = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, _, error in
             
             guard let data = data,
                   error == nil else { return }
             
             if let image = UIImage(data: data) {
+                
+                if self.savedImages.count < 5 {
+                    self.savedImages.append(data)
+                    UserDefaults.standard.set(self.savedImages, forKey: "savedImages")
+                } else {
+                    self.savedImages.removeFirst()
+                    self.savedImages.append(data)
+                    UserDefaults.standard.set(self.savedImages, forKey: "savedImages")
+                }
                 completion(.success(image))
             } else {
                 completion(.success(UIImage(named: "error")!))
             }
         }
-        task.resume()
+        taskReference?.resume()
+    }
+    
+    func cancelRequest() {
+        taskReference?.cancel()
+    }
+    
+    func retriveStoredImages() -> [Data] {
+        
+        savedImages = UserDefaults.standard.object(forKey: "savedImages") as? [Data] ?? [Data]()
+        
+        return savedImages
+    }
+    
+    func clearSavedImages() {
+        savedImages = []
+        UserDefaults.standard.set(savedImages, forKey: "savedImages")
     }
 }
